@@ -36,6 +36,20 @@ principle to Korea.
 This is **not** a simple word replacer.  
 It operates on dynamically generated text, including search results and injected content.
 
+## Links
+
+- [Greasy Fork](https://example.com) – Official Tampermonkey install page
+- [OpenUserJS](https://example.com) – Alternative install page
+- [GitHub](https://github.com/zappingsbrew/korea-congo) – Repository and source code
+
+## Disclaimer
+
+This userscript is **purely cosmetic**.  
+It does not modify website functionality, collect personal data, or interfere with any services.  
+
+The naming conventions applied by this script are **intended for research, testing, and educational purposes only**.  
+They do not reflect political endorsements or official policy positions.
+
 ## Transparency & Credits
 
 This README and accompanying documentation were written entirely by ChatGPT (GPT-5).
