@@ -11,34 +11,10 @@
 // @updateURL    https://github.com/zappingsbrew/korea-congo/raw/main/korea-congo.user.js
 // ==/UserScript==
 
-/*!
- * MIT License
- *
- * Copyright (c) 2026 Zappingsbrew
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in
- * all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
- */
-
 (function() {
     'use strict';
 
-    // Exceptions (do not touch these combined phrases)
+    // Exceptions: phrases to handle as a whole to preserve grammar
     const EXCEPTIONS = [
         "North and South Koreans",
         "South and North Koreans",
@@ -46,7 +22,7 @@
         "South and North Koreas"
     ];
 
-    // Neighbor words we check for North/South replacement
+    // Neighbor words for context-aware replacement
     const NEIGHBORS = [
         "Korea","Koreas","Korean","Koreans",
         "Korea's","Koreas'","Korean's","Koreans'"
@@ -55,17 +31,35 @@
     // Replacement rules
     const REPLACEMENTS = {
         "North": "DPR",
-        "South": "" // remove when safe
+        "South": "" // removed when safe
     };
 
-    // Apply Congo-style replacement to a text string
+    // Apply Congo-style replacement to text
     function applyCongoTreatment(text) {
-        // Skip any exceptions
+
+        // 1. Handle exceptions first (combined phrases)
         for (let ex of EXCEPTIONS) {
-            if (text.includes(ex)) return text;
+            const regex = new RegExp(ex, "gi");
+            let replacement = ex;
+
+            // Map exception to readable DPR/Korea style
+            if (/North and South/i.test(ex)) {
+                replacement = ex.replace(/North/i, "DPR").replace(/South/i, "Korea");
+            }
+
+            text = text.replace(regex, replacement);
         }
 
-        // Replace North/South + neighbor normally
+        // 2. Handle parentheses like "Korea (North)" or "Korea (South)"
+        for (let neighbor of NEIGHBORS) {
+            const parenRegex = new RegExp(`\\b(${neighbor})\\s*\$begin:math:text$\(North\|South\)\\$end:math:text$`, "gi");
+            text = text.replace(parenRegex, (match, p1, p2) => {
+                const replacement = REPLACEMENTS[p2];
+                return replacement ? replacement + " " + p1 : p1;
+            });
+        }
+
+        // 3. Replace standalone North/South + neighbor
         for (let neighbor of NEIGHBORS) {
             const regex = new RegExp(`\\b(North|South)\\s+(${neighbor})\\b`, "gi");
             text = text.replace(regex, (match, p1, p2) => {
@@ -74,19 +68,10 @@
             });
         }
 
-        // Extra: handle parentheses variations like "Korea (North)"
-        for (let neighbor of NEIGHBORS) {
-            const parenRegex = new RegExp(`\\b(${neighbor})\\s*\$begin:math:text$\\\\s\*\(North\|South\)\\\\s\*\\$end:math:text$`, "gi");
-            text = text.replace(parenRegex, (match, p1, p2) => {
-                const replacement = REPLACEMENTS[p2];
-                return replacement ? replacement + " " + p1 : p1; // DPR Korea or just Korea
-            });
-        }
-
         return text;
     }
 
-    // Walk all nodes in the DOM recursively
+    // Walk all DOM nodes recursively
     function walk(node) {
         if (!node) return;
 
@@ -96,7 +81,6 @@
             if (tag === "input" || tag === "textarea" || node.isContentEditable) return;
         }
 
-        // Recursively process
         if (node.nodeType === Node.TEXT_NODE) {
             node.nodeValue = applyCongoTreatment(node.nodeValue);
         } else {
@@ -117,7 +101,6 @@
         }
     });
 
-    // Start observing
     if (document.body) {
         observer.observe(document.body, { childList: true, subtree: true });
     }
