@@ -38,19 +38,21 @@ It operates on dynamically generated text, including search results and injected
 
 ## Installation
 
-To use the **Korea Congo-Style Naming** userscript, follow these steps:
+You can install the **Korea Congo-Style Naming** userscript from one of the official sources:
 
-1. **Install a userscript manager** in your browser, such as:
-   - [Tampermonkey](https://www.tampermonkey.net/) (recommended)
-   - [Violentmonkey](https://violentmonkey.github.io/)
+1. **GitHub Releases** – Download the latest version directly from the repository:  
+   [korea-congo.user.js](https://github.com/zappingsbrew/korea-congo/releases/latest/download/korea-congo.user.js)
 
-2. **Install the script**:
-   - From **GitHub** (raw file):  
-     [korea-congo.user.js](#) *(placeholder link for now)*
-   - Or from **Greasy Fork** / **OpenUserJS** once published.
+2. **Greasy Fork** – Official Tampermonkey install page:  
+   [Greasy Fork](https://greasyfork.org/)
 
-3. After installation, the script will automatically replace ambiguous references to Korea with context-appropriate naming when you visit websites.  
-4. No additional configuration is required — it runs in the background and modifies text dynamically.
+3. **OpenUserJS** – Alternative install page:  
+   [OpenUserJS](https://openuserjs.org/)
+
+### Usage
+
+- After installation, the script will automatically replace ambiguous references to Korea with context-appropriate naming when you visit websites.  
+- No configuration is required — it runs in the background and modifies text dynamically.  
 
 > ⚠️ The userscript only changes **displayed text locally in your browser**. It does **not** modify websites or collect personal data.
 
