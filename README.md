@@ -43,4 +43,4 @@ Repository is used for active development and testing.
 
 ## License
 
-This project is licensed under the **MIT License** — see the [LICENSE](https://github.com/zappingsbrew/korea-congo/raw/main/LICENSE) file for details.
+This project is licensed under the **MIT License** — see the [LICENSE](https://github.com/zappingsbrew/korea-congo/blob/main/LICENSE) file for details.
