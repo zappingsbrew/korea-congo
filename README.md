@@ -36,6 +36,16 @@ principle to Korea.
 This is **not** a simple word replacer.  
 It operates on dynamically generated text, including search results and injected content.
 
+## Transparency & Credits
+
+This README and accompanying documentation were written entirely by ChatGPT (GPT-5).
+
+- The userscript code (**Korea Congo-Style Naming**) was authored by ChatGPT (GPT-5).  
+- The userscript code was published by Zappingsbrew.  
+- ChatGPT generated the README structure, sections, formatting, and descriptive text.  
+- This userscript is purely cosmetic and **does not modify any website functionality or collect personal data**.  
+- The script only replaces displayed text locally in your browser, including dynamically generated content like search results.
+
 ## Status
 
 Not a release.  
