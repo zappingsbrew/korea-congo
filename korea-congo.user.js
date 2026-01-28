@@ -9,6 +9,7 @@
 // @icon         https://github.com/twitter/twemoji/blob/master/assets/72x72/1f1f0-1f1f7.png?raw=true
 // @downloadURL  https://github.com/zappingsbrew/korea-congo/raw/main/korea-congo.user.js
 // @updateURL    https://github.com/zappingsbrew/korea-congo/raw/main/korea-congo.user.js
+// @license      MIT
 // ==/UserScript==
 
 /*!
@@ -38,43 +39,44 @@
 (function() {
     'use strict';
 
-    // Exceptions: phrases to handle as a whole to preserve grammar
-    const EXCEPTIONS = [
-        "North and South Koreans",
-        "South and North Koreans",
-        "North and South Koreas",
-        "South and North Koreas"
-    ];
-
-    // Neighbor words for context-aware replacement
+    // Neighbor words to check for North/South replacement
     const NEIGHBORS = [
         "Korea","Koreas","Korean","Koreans",
         "Korea's","Koreas'","Korean's","Koreans'"
     ];
 
-    // Replacement rules
+    // Coordinated phrases we leave intact (exceptions)
+    const EXCEPTIONS = [
+        "North and South Koreans",
+        "South and North Koreans",
+        "North and South Koreas",
+        "South and North Koreas",
+        "North and South Korea",
+        "South and North Korea",
+        "North and South Korea's",
+        "South and North Korea's",
+        "North and South Koreans'",
+        "South and North Koreans'"
+        "North and South Korean's",
+        "South and North Korean's"
+    ];
+
+    // Replacement rules for standalone mentions
     const REPLACEMENTS = {
         "North": "DPR",
-        "South": "" // removed when safe
+        "South": "" // remove South when safe
     };
 
-    // Apply Congo-style replacement to text
+    // Core replacement function
     function applyCongoTreatment(text) {
 
-        // 1. Handle exceptions first (combined phrases)
+        // 1. Skip coordinated phrases
         for (let ex of EXCEPTIONS) {
             const regex = new RegExp(ex, "gi");
-            let replacement = ex;
-
-            // Map exception to readable DPR/Korea style
-            if (/North and South/i.test(ex)) {
-                replacement = ex.replace(/North/i, "DPR").replace(/South/i, "Korea");
-            }
-
-            text = text.replace(regex, replacement);
+            text = text.replace(regex, ex); // leave as-is
         }
 
-        // 2. Handle parentheses like "Korea (North)" or "Korea (South)"
+        // 2. Parentheses variations: "Korea (North)" / "Korea (South)"
         for (let neighbor of NEIGHBORS) {
             const parenRegex = new RegExp(`\\b(${neighbor})\\s*\$begin:math:text$\(North\|South\)\\$end:math:text$`, "gi");
             text = text.replace(parenRegex, (match, p1, p2) => {
@@ -83,7 +85,7 @@
             });
         }
 
-        // 3. Replace standalone North/South + neighbor
+        // 3. Standalone North/South + neighbor
         for (let neighbor of NEIGHBORS) {
             const regex = new RegExp(`\\b(North|South)\\s+(${neighbor})\\b`, "gi");
             text = text.replace(regex, (match, p1, p2) => {
