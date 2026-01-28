@@ -36,6 +36,24 @@ principle to Korea.
 This is **not** a simple word replacer.  
 It operates on dynamically generated text, including search results and injected content.
 
+## Installation
+
+To use the **Korea Congo-Style Naming** userscript, follow these steps:
+
+1. **Install a userscript manager** in your browser, such as:
+   - [Tampermonkey](https://www.tampermonkey.net/) (recommended)
+   - [Violentmonkey](https://violentmonkey.github.io/)
+
+2. **Install the script**:
+   - From **GitHub** (raw file):  
+     [korea-congo.user.js](#) *(placeholder link for now)*
+   - Or from **Greasy Fork** / **OpenUserJS** once published.
+
+3. After installation, the script will automatically replace ambiguous references to Korea with context-appropriate naming when you visit websites.  
+4. No additional configuration is required — it runs in the background and modifies text dynamically.
+
+> ⚠️ The userscript only changes **displayed text locally in your browser**. It does **not** modify websites or collect personal data.
+
 ## Links
 
 - [Greasy Fork](https://example.com) – Official Tampermonkey install page
