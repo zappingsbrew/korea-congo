@@ -47,7 +47,7 @@ You can install the **Korea Congo-Style Naming** userscript from one of the offi
    [Greasy Fork](https://greasyfork.org/en/scripts/564402-korea-congo-style-naming)
 
 3. **OpenUserJS** – Alternative install page:  
-   [OpenUserJS](https://openuserjs.org/)
+   [OpenUserJS](https://openuserjs.org/scripts/Zappingsbrew/Korea_Congo-Style_Naming)
 
 ### Usage
 
