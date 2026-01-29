@@ -44,7 +44,7 @@ You can install the **Korea Congo-Style Naming** userscript from one of the offi
    [korea-congo.user.js](https://github.com/zappingsbrew/korea-congo/releases/latest/download/korea-congo.user.js)
 
 2. **Greasy Fork** – Official Tampermonkey install page:  
-   [Greasy Fork](https://greasyfork.org/)
+   [Greasy Fork](https://greasyfork.org/en/scripts/564402-korea-congo-style-naming)
 
 3. **OpenUserJS** – Alternative install page:  
    [OpenUserJS](https://openuserjs.org/)
@@ -58,7 +58,7 @@ You can install the **Korea Congo-Style Naming** userscript from one of the offi
 
 ## Links
 
-- [Greasy Fork](https://example.com) – Official Tampermonkey install page
+- [Greasy Fork](https://greasyfork.org/en/scripts/564402-korea-congo-style-naming) – Official Tampermonkey install page
 - [OpenUserJS](https://example.com) – Alternative install page
 - [GitHub](https://github.com/zappingsbrew/korea-congo) – Repository and source code
 
@@ -79,11 +79,6 @@ This README and accompanying documentation were written entirely by ChatGPT (GPT
 - ChatGPT generated the README structure, sections, formatting, and descriptive text.  
 - This userscript is purely cosmetic and **does not modify any website functionality or collect personal data**.  
 - The script only replaces displayed text locally in your browser, including dynamically generated content like search results.
-
-## Status
-
-Not a release.  
-Repository is used for active development and testing.
 
 ## License
 
